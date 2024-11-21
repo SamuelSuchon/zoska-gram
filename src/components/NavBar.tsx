@@ -1,40 +1,39 @@
-
-// /src/components/Navbar.tsx
-
-"use client";
+"use client"; // Add this at the top
 
 import * as React from 'react';
-import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import InfoIcon from '@mui/icons-material/Info';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation'; // For Next.js routing
+import Box from '@mui/material/Box';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import { InfoOutlined, InfoRounded } from '@mui/icons-material';
 
-export default function Navbar() {
-  const [value, setValue] = React.useState('/');
-  const router = useRouter();
-
-  const handleNavigation = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-    router.push(newValue); 
-  };
+export default function SimpleBottomNavigation() {
+  const [value, setValue] = useState(0);
+  const router = useRouter(); // Client-side routing
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', position: 'fixed', bottom: 0, left: 0 }}>
       <BottomNavigation
         showLabels
         value={value}
-        onChange={handleNavigation}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+          // Add navigation logic
+          if (newValue === 0) router.push('/');
+          if (newValue === 1) router.push('/profil');
+          if (newValue === 2) router.push('/pridat');
+          if (newValue === 3) router.push('/o-mne');
+        }}
       >
-        <BottomNavigationAction label="Domov" value="/" icon={<HomeIcon />} />
-        <BottomNavigationAction label="Profily" value="/profil" icon={<AccountCircleIcon />} />
-        <BottomNavigationAction label="Príspevky" value="/prispevok" icon={<AddCircleIcon />} />
-        <BottomNavigationAction label="O mne" value="/o-mne" icon={<InfoIcon />} />
-
+        <BottomNavigationAction label="Domov" icon={<HomeRoundedIcon />} />
+        <BottomNavigationAction label="Profil" icon={<AccountCircleRoundedIcon />} />
+        <BottomNavigationAction label="Pridať príspevok" icon={<AddCircleRoundedIcon />} />
+        <BottomNavigationAction label="O mne" icon={<InfoRounded />} />
       </BottomNavigation>
     </Box>
   );
 }
-
-
