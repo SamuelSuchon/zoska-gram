@@ -1,4 +1,4 @@
-"use client"; // Add this at the top
+"use client";
 
 import * as React from 'react';
 import { useState } from 'react';
@@ -9,11 +9,11 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
-import { InfoOutlined, InfoRounded } from '@mui/icons-material';
+import {InfoRounded} from '@mui/icons-material';
 
 export default function SimpleBottomNavigation() {
   const [value, setValue] = useState(0);
-  const router = useRouter(); // Client-side routing
+  const router = useRouter(); 
 
   return (
     <Box sx={{ width: '100%', position: 'fixed', bottom: 0, left: 0 }}>
@@ -22,7 +22,8 @@ export default function SimpleBottomNavigation() {
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
-          // Add navigation logic
+          
+          //navigation logic
           if (newValue === 0) router.push('/');
           if (newValue === 1) router.push('/profil');
           if (newValue === 2) router.push('/pridat');
